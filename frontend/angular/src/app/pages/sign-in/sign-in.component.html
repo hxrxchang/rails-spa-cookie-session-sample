@@ -1,1 +1,15 @@
-<p>sign-in works!</p>
+<form [formGroup]="signInFormGroup" (ngSubmit)="onSubmit()">
+  <input
+    class="form-item"
+    type="text"
+    placeholder="ユーザー名"
+    formControlName="userName"
+  />
+  <input
+    class="form-item"
+    type="password"
+    placeholder="パスワード"
+    formControlName="password"
+  />
+  <button type="submit" [disabled]="signInFormGroup.invalid">ログイン</button>
+</form>
