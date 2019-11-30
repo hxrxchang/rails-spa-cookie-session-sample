@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,7 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder, private auth: AuthService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   signInFormGroup = this.formBuilder.group({
     userName: ['', Validators.required],
@@ -18,11 +23,12 @@ export class SignInComponent implements OnInit {
   ngOnInit() {}
 
   async onSubmit() {
-    const res = await this.auth
+    await this.auth
       .signIn(
         this.signInFormGroup.value.userName,
         this.signInFormGroup.value.password
       )
       .toPromise();
+    this.router.navigateByUrl('/');
   }
 }
