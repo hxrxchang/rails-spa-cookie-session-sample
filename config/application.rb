@@ -16,7 +16,8 @@ module RailsSpaCookieSessionSample
         origins "http://localhost:4200"
         resource "*",
           headers: :any,
-          methods: [:get, :post, :options, :head]
+          methods: [:get, :post, :options, :head],
+          credentials: true
       end
     end
   end
