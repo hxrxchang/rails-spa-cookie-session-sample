@@ -14,7 +14,11 @@ class ApplicationController < ActionController::API
   end
 
   def current_user
-    @user
+    if @user
+      return @user
+    else
+      return nil
+    end
   end
 
   def render_401_error(error = nil)
