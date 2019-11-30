@@ -1,3 +1,4 @@
+<h1>ログイン</h1>
 <form [formGroup]="signInFormGroup" (ngSubmit)="onSubmit()">
   <input
     class="form-item"
@@ -13,5 +14,8 @@
     formControlName="password"
     autocomplete="current-password"
   />
-  <button type="submit" [disabled]="signInFormGroup.invalid">ログイン</button>
+  <a routerLink="/sign-up">登録はこちら</a>
+  <button class="form-item" type="submit" [disabled]="signInFormGroup.invalid">
+    ログイン
+  </button>
 </form>

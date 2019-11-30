@@ -1,1 +1,21 @@
-<p>sign-up works!</p>
+<h1>新規登録</h1>
+<form [formGroup]="signUpFormGroup" (ngSubmit)="onSubmit()">
+  <input
+    class="form-item"
+    type="text"
+    placeholder="ユーザー名"
+    formControlName="userName"
+    autocomplete="user-name"
+  />
+  <input
+    class="form-item"
+    type="password"
+    placeholder="パスワード"
+    formControlName="password"
+    autocomplete="new-password"
+  />
+  <span class="error-message" *ngIf="errorOccurred">登録に失敗しました</span>
+  <button class="form-item" type="submit" [disabled]="signUpFormGroup.invalid">
+    登録する
+  </button>
+</form>

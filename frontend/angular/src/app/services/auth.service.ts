@@ -22,4 +22,11 @@ export class AuthService {
       {}
     );
   }
+
+  signUp(name: string, password: string): Observable<string> {
+    return this.http.post<string>(`${environment.apiUrl}/api/user`, {
+      name,
+      password
+    });
+  }
 }
