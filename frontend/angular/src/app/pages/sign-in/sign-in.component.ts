@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,7 +8,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private auth: AuthService) {}
 
   signInFormGroup = this.formBuilder.group({
     userName: ['', Validators.required],
@@ -16,7 +17,12 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit() {
-    console.log(this.signInFormGroup);
+  async onSubmit() {
+    const res = await this.auth
+      .signIn(
+        this.signInFormGroup.value.userName,
+        this.signInFormGroup.value.password
+      )
+      .toPromise();
   }
 }
