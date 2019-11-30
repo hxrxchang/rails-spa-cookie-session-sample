@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { HelloService } from 'src/app/services/hello.service';
 
 @Component({
   selector: 'app-hello',
@@ -9,9 +11,17 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./hello.component.scss']
 })
 export class HelloComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private helloService: HelloService
+  ) {}
 
-  ngOnInit() {}
+  message$: Observable<string>;
+
+  ngOnInit() {
+    this.message$ = this.helloService.getHello();
+  }
 
   async onClickSignOut() {
     await this.authService.signOut().toPromise();

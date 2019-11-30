@@ -1,2 +1,4 @@
-<h1>hello world</h1>
+<ng-container *ngIf="message$ | async as message">
+  <h1>{{ message }}</h1>
+</ng-container>
 <button (click)="onClickSignOut()">ログアウト</button>
