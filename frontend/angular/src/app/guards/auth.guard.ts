@@ -23,7 +23,9 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> {
     if (state.url === '/hello') {
       return this.http
-        .get<string>(`${environment.apiUrl}/api/auth/check-session`)
+        .get<{ message: string }>(
+          `${environment.apiUrl}/api/auth/check-session`
+        )
         .pipe(
           map(() => {
             return true;
@@ -35,7 +37,9 @@ export class AuthGuard implements CanActivate {
         );
     } else if (state.url === '/sign-in' || state.url === '/sign-up') {
       return this.http
-        .get<string>(`${environment.apiUrl}/api/auth/check-session`)
+        .get<{ message: string }>(
+          `${environment.apiUrl}/api/auth/check-session`
+        )
         .pipe(
           map(() => {
             this.router.navigateByUrl('/');

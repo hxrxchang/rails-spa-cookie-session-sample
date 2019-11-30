@@ -9,24 +9,30 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  signIn(userName: string, password: string): Observable<string> {
-    return this.http.post<string>(`${environment.apiUrl}/api/auth/sign-in`, {
-      name: userName,
-      password
-    });
+  signIn(userName: string, password: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      `${environment.apiUrl}/api/auth/sign-in`,
+      {
+        name: userName,
+        password
+      }
+    );
   }
 
-  signOut(): Observable<string> {
-    return this.http.post<string>(
+  signOut(): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
       `${environment.apiUrl}/api/auth/sign-out`,
       {}
     );
   }
 
-  signUp(name: string, password: string): Observable<string> {
-    return this.http.post<string>(`${environment.apiUrl}/api/user`, {
-      name,
-      password
-    });
+  signUp(name: string, password: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      `${environment.apiUrl}/api/user`,
+      {
+        name,
+        password
+      }
+    );
   }
 }
