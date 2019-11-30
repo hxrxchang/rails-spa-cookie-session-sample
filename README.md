@@ -1,24 +1,21 @@
-# README
+# rails-spa-cookie-session-sample
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+このリポジトリは [Classi Advent Calendar 2019](https://qiita.com/advent-calendar/2019/classi) 1 日目の記事のサンプルアプリケーションです。  
+Single Page Application と Rails API で cookie + session を用いた認証方法を説明します。
 
-Things you may want to cover:
+# Rails API サーバーの立ち上げ
 
-* Ruby version
+```
+bundle install --path=vendor/bundle
+bundle exec rails db:create
+bundle exec rails db:migrate
+bundle exec rails s
+```
 
-* System dependencies
+# Angular ローカルサーバーの立ち上げ
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+cd frontend/angular
+yarn
+yarn start
+```
