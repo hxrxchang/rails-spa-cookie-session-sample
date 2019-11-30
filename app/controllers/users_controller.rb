@@ -3,6 +3,9 @@ class UsersController < ApplicationController
 
   def sign_in
     user = User.find_by(name: params[:name]).authenticate(params[:password])
+    if !user
+      return render json: { message: "name or password is wrong"}, status: 400
+    end
     session[:user_id] = user.id
     render json: { message: "sign in success" }
   end
