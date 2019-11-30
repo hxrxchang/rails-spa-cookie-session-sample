@@ -15,4 +15,11 @@ export class AuthService {
       password
     });
   }
+
+  signOut(): Observable<string> {
+    return this.http.post<string>(
+      `${environment.apiUrl}/api/auth/sign-out`,
+      {}
+    );
+  }
 }
