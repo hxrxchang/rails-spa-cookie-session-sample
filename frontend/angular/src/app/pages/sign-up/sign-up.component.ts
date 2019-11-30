@@ -34,6 +34,7 @@ export class SignUpComponent implements OnInit {
         .toPromise();
       this.router.navigateByUrl('/');
     } catch (error) {
+      // 本当はエラーの種類によってメッセージを出し分けたい
       this.errorOccurred = true;
     }
   }
