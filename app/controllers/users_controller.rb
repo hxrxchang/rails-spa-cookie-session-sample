@@ -18,11 +18,10 @@ class UsersController < ApplicationController
   def sign_up
     begin
       user = User.create!(name: params[:name], password: params[:password])
-    rescue ActiveRecord::RecordNotUnique => e
-      return render json: { message: "this name is already registered" }, status: 400
     rescue ActiveRecord::RecordInvalid => e
       # ほんとはもっと細かくエラーメッセージを切り分けたい
       # パターン
+      # - nameがユニークじゃない
       # - name, passwordがマルチバイト文字 or nil
       # - password文字数が6~20じゃない
       return render json: { message: "this value is invalid" }, status: 400
