@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   before_action :check_is_signed_in
+  before_action :csrf_protection
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_404_error
   rescue_from StandardError, with: :render_500_error
@@ -21,8 +22,25 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def csrf_protection
+    if request.method != 'POST'
+      return true
+    end
+
+    if URI.parse(request.headers['Origin']).host != request.host
+      render_403_error()
+      return
+    end
+
+    return true
+  end
+
   def render_401_error(error = nil)
     render json: { message: "unauthorized" }, status: 401
+  end
+
+  def render_403_error(error = nil)
+    render json: { message: "forbidden" }, status: 403
   end
 
   def render_404_error(error = nil)
