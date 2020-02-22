@@ -5,14 +5,23 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class WithCredentialInterceptor {
+export class HttpInterceptor {
   constructor() {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    req = req.clone({ withCredentials: true });
+    let contentType: string | null = null;
+    if (req.headers.has('Content-Type')) {
+      contentType = req.headers.get('Content-Type');
+    }
+    req = req.clone({
+      withCredentials: true,
+      setHeaders: {
+        'Content-Type': contentType === null ? 'application/json' : contentType
+      }
+    });
     return next.handle(req);
   }
 }
