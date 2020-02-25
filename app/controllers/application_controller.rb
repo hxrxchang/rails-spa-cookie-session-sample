@@ -1,6 +1,7 @@
-class ApplicationController < ActionController::API
-  before_action :check_is_signed_in
-  before_action :csrf_protection
+class ApplicationController < ActionController::Base
+  protect_from_forgery unless: -> { request.format.json? }
+
+  before_action :check_is_signed_in, :csrf_protection
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_404_error
   rescue_from StandardError, with: :render_500_error
