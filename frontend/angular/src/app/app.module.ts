@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { HelloComponent } from './pages/hello/hello.component';
-import { WithCredentialInterceptor } from './interceptors/with-credential-interceptor';
+import { HttpInterceptor } from './interceptors/http-interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { WithCredentialInterceptor } from './interceptors/with-credential-interc
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: WithCredentialInterceptor,
+      useClass: HttpInterceptor,
       multi: true
     }
   ],
